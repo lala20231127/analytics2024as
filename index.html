@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+	<meta charset="utf-8">
+	<title>JavaScriptの森</title>
+	<meta name="robots" content="noindex,nofollow">
+	<meta name="description" content="これはJavaScriptの課題作品です。">
+	<link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+	<link rel="stylesheet" type="text/css" href="slick/slick.css">
+	<link rel="stylesheet" href="css/lightbox.css">
+	<link rel="stylesheet" href="css/style.css">
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+		integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+	<script src="js/lightbox.js" type="text/javascript"></script>
+	<script>
+		lightbox.option({
+			'resizeDuration': 200,
+			'wrapAround': true
+		});
+
+		$(function () {
+			$('.Toggle').click(function () {
+				$(this).toggleClass('active');
+
+				if ($(this).hasClass('active')) {
+					$('.NavMenu').addClass('active'); //クラスを付与
+				} else {
+					$('.NavMenu').removeClass('active'); //クラスを外す
+				}
+			});
+		});
+	</script>
+	<style>
+		body {
+			background: #a8ffa8;
+			text-align: center;
+		}
+
+		main {
+			display: inline-block;
+			text-align: left;
+		}
+
+		button {
+
+			background-color: rgb(180, 179, 179);
+			border-style: groove;
+			border-radius: 5%;
+		}
+
+		#click {
+			position: sticky;
+			top: 3%;
+			left: 60%;
+			width: 150px;
+			height: auto;
+			margin: 0;
+		}
+
+		/*==================================================
+		スライダーのためのcss
+		===================================*/
+		.slider {
+			position: relative;
+			z-index: 3;
+			/*↑z-indexの値をh1のz-indexの値よりも小さくして背景に回す*/
+			height: 30vh;
+			/*スライダー全体の縦幅を画面の高さいっぱい（100vh）にする*/
+		}
+
+		.slider-item {
+			z-index: 4;
+		}
+
+		/* 背景画像設定 */
+
+		.slider-item01 {
+			background: url("images/sample01.jpeg");
+		}
+
+		.slider-item02 {
+			background: url("images/sample04.jpg");
+		}
+
+		.slider-item03 {
+			background: url("images/sample05.jpg");
+		}
+
+		.slider-item {
+			width: 100%;
+			/*各スライダー全体の横幅を画面の高さいっぱい（100%）にする*/
+			height: 30vh;
+			/*各スライダー全体の縦幅を画面の高さいっぱい（100vh）にする*/
+			background-repeat: no-repeat;
+			/*背景画像をリピートしない*/
+			background-position: center;
+			/*背景画像の位置を中央に*/
+			background-size: cover;
+			/*背景画像が.slider-item全体を覆い表示*/
+		}
+
+		/*矢印の設定*/
+
+		.slick-prev,
+		.slick-next {
+			position: absolute;
+			z-index: 3;
+			top: 42%;
+			cursor: pointer;
+			/*マウスカーソルを指マークに*/
+			outline: none;
+			/*クリックをしたら出てくる枠線を消す*/
+			border-top: 2px solid #fff;
+			/*矢印の色*/
+			border-right: 2px solid #fff;
+			/*矢印の色*/
+			height: 25px;
+			width: 25px;
+		}
+
+		.slick-prev {
+			/*戻る矢印の位置と形状*/
+			left: 2.5%;
+			transform: rotate(-135deg);
+		}
+
+		.slick-next {
+			/*次へ矢印の位置と形状*/
+			right: 2.5%;
+			transform: rotate(45deg);
+		}
+
+		/*ドットナビゲーションの設定*/
+
+		.slick-dots {
+			position: relative;
+			z-index: 3;
+			text-align: center;
+			margin: -15px 0 0 0;
+			/*ドットの位置*/
+		}
+
+		.slick-dots li {
+			display: inline-block;
+			margin: 0 5px;
+		}
+
+		.slick-dots button {
+			color: transparent;
+			outline: none;
+			width: 8px;
+			/*ドットボタンのサイズ*/
+			height: 8px;
+			/*ドットボタンのサイズ*/
+			display: block;
+			border-radius: 50%;
+			background: #fff;
+			/*ドットボタンの色*/
+		}
+
+		.slick-dots .slick-active button {
+			background: #333;
+			/*ドットボタンの現在地表示の色*/
+		}
+
+
+		/*========= レイアウトのためのCSS ===============*/
+		ul {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+
+		a {
+			color: #fff;
+		}
+
+		a:hover,
+		a:active {
+			text-decoration: none;
+		}
+
+		/* 画像に重ねる文字段落の設定 */
+		.slider-item>p {
+			position: absolute;
+			top: 20%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			text-align: center;
+			z-index: 4;
+			font-size: 5vw;
+			font-weight: bold;
+			letter-spacing: 0.1em;
+			/* text-transform: uppercase; */
+			color: #01ffb7;
+			text-shadow: 5px 9px 12px black;
+		}
+
+		/* 画像に重ねる文字の位置を個別に設定する*/
+		.slider-item01>p {
+			top: 50%;
+			left: 50%;
+		}
+
+		.slider-item02>p {
+			top: 50%;
+			left: 50%;
+		}
+
+		.slider-item03>P {
+			top: 50%;
+			left: 50%;
+		}
+
+		.wrapper {
+			position: relative;
+		}
+
+		.container {
+			background: #555;
+		}
+
+		.container p {
+			padding: 300px 0;
+			text-align: center;
+			color: #fff;
+		}
+
+		button {
+			cursor: pointer;
+		}
+
+		.text {
+			list-style: none;
+		}
+
+		#red {
+			margin-left: 50px;
+			width: 100px;
+			height: 100px;
+			border-radius: 100px;
+			background: red;
+		}
+
+		.contents1 {
+			font-weight: bold;
+			color: red;
+		}
+
+		.contents2 {
+			font-weight: bold;
+		}
+
+		/* フッター----------------------------------- */
+		footer {
+			background: #432;
+			text-align: center;
+			padding: 26px 0;
+		}
+
+		footer p {
+			color: #fff;
+			font-size: 0.875em;
+		}
+
+		/* 一枚の画像でサムネイル表示もする場合の設定　※縮小率が大きいと画質が荒れる */
+		li img {
+			object-fit: cover;
+			width: 100%;
+			height: 100%;
+
+			/* ------------------モバイル版----------------------------------- */
+			@media(max-width:600px) {
+				main {
+					font-size: 2.5rem;
+				}
+			}
+		}
+	</style>
+	<div class="wrapper">
+		<ul class="slider">
+			<li class="slider-item slider-item01">
+				<p>javaScriptの森</p>
+			</li>
+			<li class="slider-item slider-item02">
+				<p>javaScriptの森</p>
+			</li>
+			<li class="slider-item slider-item03">
+				<p>javaScriptの森</p>
+			</li>
+		</ul>
+		<!--/wrapper-->
+	</div>
+</head>
+
+<body>
+	<main>
+		<br>
+		<h2>　jQueryのDOM操作</h2>
+		<br>
+		　<button id="click"><strong>　clickイベント　</strong></button><br>
+		<br>
+		<h3>　textメソッド</h3>
+		<ul>
+			<li>　　指定した要素のテキスト（文字列）を<span class="aaa">○○</span>できるよ</li>
+
+			<li>　　別の場所にある<span class="bbb">テキスト</span>を<span class="ccc">□□</span>して指定した要素の<span
+					class="ddd">△△</span>を<span class="aaa">○○</span>できるよ</li>
+		</ul>
+		<br>
+		<h3>　htmlメソッド</h3>
+		<ul>
+			<li>　　指定した要素の内容（コンテンツ）をタグ付きの<span class="eee">○○</span>に<span class="aaa">□□</span>できるよ</li>
+			<p>　　　例）&lt;p&gt; <span class="fff">コンテンツ</span> &lt;/p&gt;</p>
+			<li>　　指定したコンテンツを別の場所にある<span class="eee">○○</span>に<span class="aaa">□□</span>できるよ</li>
+		</ul>
+		<br>
+		<h3>　挿入メソッド（prepend,append,before,after）</h3><br>
+		<p class="ggg">　　"このテキストに対して"　</p><br>
+
+		<h3>　移動メソッド（prependTo,appendTo,insertBefore,insertAfter）</h3>
+		<br>
+		<p class="hhh">　　"このテキストに対して"　</p><br>
+
+		<strong class="iii">　　prependTo</strong>
+		<strong class="jjj">　　appendTo</strong>
+		<strong class="kkk">　　insertBefore</strong>
+		<strong class="lll">　　insertAfter</strong><br>
+		<br>
+		<h3>　wrapメソッド</h3><br>
+		　　<button id="wrap"><strong>　wrap　</strong></button>　　<button
+			id="wrapAll"><strong>　wrapAll　</strong></button>　　<button
+			id="wrapInner"><strong>　wrapInner　</strong></button>　　<button
+			id="unwrap"><strong>　unwrap　</strong></button><br>
+		<ul class="text">
+			　　<li id="ex">　</li>
+			<li class="rice"><span>　　　　&lt;p&gt; ごはん &lt;/p&gt;</span></li>
+			<li class="plum"><span>　　　　&lt;p&gt; 梅干し &lt;/p&gt;</span></li>
+			<li>　　　　 　　 ひじき</li>
+			<li>　　　　 　　 からあげ</li>
+			<li>　　　　 　　 キムチ</li>
+			<li class="seaweed"><span>　　　　&lt;p&gt; のり &lt;/p&gt;</span></li>
+		</ul>
+		<br>
+		<h3>　cssメソッド</h3>
+		<br>
+		<ul>
+			<li>　　CSSメソッドの設定・変更<br>
+				　　イベントを設定してcssを変更できるよ<br>
+				　　赤いスペースにカーソルを合わせてみてね
+			</li>
+		</ul>
+		<br>
+		<div id="red"></div>
+		<br>
+		<h3>　その他メソッド</h3>
+		<br>
+		　<button id="replaceWith"><strong>　replaceWith　</strong></button>　　<button
+			id="remove"><strong>　remove　</strong></button>　　<button
+			id="attr"><strong>　attribute　</strong></button>　　<button
+			id="removeAttribute"><strong>　removeAttribute　</strong></button><br>
+		<br>
+		　<button id="addClass"><strong>　addClass　</strong></button>　　<button
+			id="removeClass"><strong>　removeClass　</strong></button>　　<button
+			id="toggleClass"><strong>　toggleClass　</strong></button>
+		<br><br>
+		<ul class="text">
+			<li id="ex2">　</li>
+			<li>　　例）<br>
+				　　　<span id="rw">&lt;div&gt;</span><br>
+				　　　　　　&lt;a href="https://<span id="text2">□□□</span>/index.html" <span
+					class="target">target="_blank"</span>&gt; <span class="contents1">コンテンツ　</span> <span
+					class="contents2">コンテンツ</span> &lt;/a&gt;
+				<br>　　　<span id="rw2">&lt;/div&gt;</span>
+				<br>
+			</li>
+		</ul>
+	</main>
+	<br>
+	<hr>
+	<br>
+	<section id="demo2">
+		<!-- ココに ul要素 を書く -->
+		<ul>
+			<li>
+				<a href="images/sample02.jpg" data-lightbox="roadtrip" data-title="My caption3">
+					<img src="images/sample02.jpg" alt="">
+				</a>
+			</li>
+			<li>
+				<a href="images/sample03.jpg" data-lightbox="roadtrip" data-title="My caption4">
+					<img src="images/sample03.jpg" alt="">
+				</a>
+			</li>
+			<li>
+				<a href="images/sample06.jpg" data-lightbox="roadtrip" data-title="My caption5">
+					<img src="images/sample06.jpg" alt="">
+				</a>
+			</li>
+			<li>
+				<a href="images/sample07.jpg" data-lightbox="roadtrip" data-title="My caption6">
+					<img src="images/sample07.jpg" alt="">
+				</a>
+			</li>
+		</ul>
+		<br><br><br><br><br><br><br><br><br>
+	</section>
+	<script src="slick/slick.min.js"></script>
+	<script>
+		$('.slider').slick({
+			fade: true,//切り替えをフェードで行う。初期値はfalse。
+			autoplay: true,//自動的に動き出すか。初期値はfalse。
+			autoplaySpeed: 3000,//次のスライドに切り替わる待ち時間
+			speed: 2000,//スライドの動きのスピード。初期値は300。
+			infinite: true,//スライドをループさせるかどうか。初期値はtrue。
+			slidesToShow: 1,//スライドを画面に3枚見せる
+			slidesToScroll: 1,//1回のスクロールで3枚の写真を移動して見せる
+			arrows: true,//左右の矢印あり
+			prevArrow: '<div class="slick-prev"></div>',//矢印部分PreviewのHTMLを変更
+			nextArrow: '<div class="slick-next"></div>',//矢印部分NextのHTMLを変更
+			dots: true,//下部ドットナビゲーションの表示
+			pauseOnFocus: true,//フォーカスで一時停止を無効
+			pauseOnHover: false,//マウスホバーで一時停止を無効
+			pauseOnDotsHover: false,//ドットナビゲーションをマウスホバーで一時停止を無効
+		});
+
+		//スマホ用：スライダーをタッチしても止めずにスライドをさせたい場合
+		$('.slider').on('touchmove', function (event, slick, currentSlide, nextSlide) {
+			$('.slider').slick('slickPlay');
+		});
+
+		$(function () {
+			$("#click").click(function () {
+				$(".aaa").text("変更");
+				$(".ccc").text("取得");
+				let moji1 = $(".bbb").text();
+				$(".ddd").text(moji1);
+				$(".eee").html("<strong>要素");
+				$(".fff").text("<span>要素</span>");
+				$(".ggg").prepend("　　<strong>prepend");
+				$(".ggg").append("　　<strong>append");
+				$(".ggg").before("　　<strong>before");
+				$(".ggg").after("　　<strong>after</strong><br>");
+				$(".iii").prependTo(".hhh");
+				$(".jjj").appendTo(".hhh");
+				$(".kkk").insertBefore(".hhh");
+				$(".lll").insertAfter(".hhh");
+				$(".mmm").text("　　例）<div><p>コンテンツ</p></div>");
+				$(".mmm").wrap("<div>");
+			});
+			$("#wrap").one("click", function () {
+				$("#ex").html("　　<strong>各要素を指定した要素で個別に包む");
+				$(".rice").text("　<div><p> ごはん </p></div>");
+				$(".plum").text("　<div><p> 梅干し </p></div>");
+				$(".seaweed").text("　<div><p> のり </p></div>");
+			});
+
+			$("#wrapAll").one("click", function () {
+				$("#ex").html("　　<strong>全要素をまとめて包む</strong>　※指定した要素が複数ありその間に別の要素があるときは後ろに追い出される");
+				$(".rice").before("&lt;div&gt;");
+				$(".plum").after("&lt;/div&gt;");
+				$(".plum").text("　　　　<p> 梅干し </p>");
+				$(".seaweed").insertAfter(".plum");
+				$(".seaweed").text("　　　　<p> のり </p>");
+			});
+
+			$("#wrapInner").one("click", function () {
+				$("#ex").html("　　<strong>子要素やコンテンツを別の要素で包む");
+				$(".rice").text("<p><span> ごはん </span></p>");
+				$(".plum").text("<p><span> 梅干し </span></p>");
+				$(".seaweed").text("<p><span> のり </span></p>");
+			});
+
+			$("#unwrap").one("click", function () {
+				$("#ex").html("<strong>親要素を取り除く");
+				$(".rice").text("　　　　　 　 ごはん");
+				$(".plum").text("　　　　　 　 梅干し");
+				$(".seaweed").text("　　　　　 　 のり");
+			});
+
+			$(function () {
+				$("#red").mouseover(function () {
+					$(this).css("background", "blue");
+				}).mouseout(function () {
+					$(this).css("background", "green");
+				});
+			});
+
+			$("#replaceWith").one("click", function () {
+				$("#ex2").html("　<strong>要素の置き換え");
+				$("#rw").text("<p>").css("background", "yellow");
+				$("#rw2").text("</p>").css("background", "yellow");
+			});
+
+			$("#remove").one("click", function () {
+				$("#ex2").html("　<strong>要素の削除");
+				$("#rw").text("　　　").css("background", "yellow");
+				$("#rw2").text("　　　").css("background", "yellow");
+			});
+
+			$("#attr").one("click", function () {
+				$("#ex2").html("　<strong>属性(アトリビュート)値の変更");
+				$("#text2").text("△△△");
+				$("#text2").css("background", "yellow");
+			});
+
+			$("#removeAttribute").one("click", function () {
+				$("#ex2").html("　<strong>属性(アトリビュート)の削除");
+				$(".target").text("　　　　　　　　");
+				$(".target").css("background", "yellow");
+			});
+
+			$("#addClass").one("click", function () {
+				$("#ex2").html("　<strong>class属性の追加");
+				$(".contents1").css("background", "yellow");
+				$(".contents2").css("color", "blue").css("background", "yellow");
+			});
+
+			$("#removeClass").one("click", function () {
+				$("#ex2").html("　<strong>class属性の削除");
+				$(".contents1").removeClass("contents1").css("background", "yellow");
+				$(".contents2").removeClass("contents2").css("background", "yellow");
+			});
+
+			$(function () {
+				$("#toggleClass").click(function () {
+					$("#ex2").html("　<strong>class属性値の付け外し");
+					$(".contents1").toggleClass("contents1").css("background", "yellow");
+					$(".contents2").toggleClass("contents1").css("background", "yellow");
+				});
+			});
+		});
+	</script>
+
+</body>
+<footer>
+	<div class="wrapper">
+		<p><small>&copy; 2023 Shimabox</small></p>
+	</div>
+</footer>
+
+</html>
